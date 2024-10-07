@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/carousel"
 import Loader from "../loader/Loader.jsx";
 import {PropertyListByCategoryRequest} from "../../apiRequest/PropertyApiRequest.js";
+import NoData from "../layout/NoData.jsx";
 
 const Listings = () => {
     const CategoryValue = useSelector((state) => state.category.categoryValue);
@@ -23,7 +24,7 @@ const Listings = () => {
 
     return (
         <>{
-            loader?<Loader/>:(PropertyList.map((item,index) => (
+            loader?<Loader/>:PropertyList.length>0?(PropertyList.map((item,index) => (
                 <div key={index} className="relative bg-white rounded-lg mt-5">
                     <Carousel className="w-full">
                         <CarouselContent>
@@ -55,7 +56,7 @@ const Listings = () => {
 
                     </div>
                 </div>
-            )))
+            ))):<NoData/>
         }
         </>
     );
