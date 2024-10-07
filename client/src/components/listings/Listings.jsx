@@ -12,14 +12,15 @@ import {PropertyListByCategoryRequest} from "../../apiRequest/PropertyApiRequest
 
 const Listings = () => {
     const CategoryValue = useSelector((state) => state.category.categoryValue);
+    const FilterToggle = useSelector((state) => state.category.filterToggle);
     useEffect(() => {
         (async () => {
             await PropertyListByCategoryRequest(CategoryValue);
         })();
-    }, [CategoryValue]);
+    }, [CategoryValue,FilterToggle]);
     const PropertyList = useSelector((state) => state.property.PropertyList);
     const loader = useSelector((state) => state.loaderAnimation.loader);
-    const FilterToggle = useSelector((state) => state.category.filterToggle);
+
     return (
         <>{
             loader?<Loader/>:(PropertyList.map((item,index) => (

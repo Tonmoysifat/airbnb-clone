@@ -23,8 +23,8 @@ export const PropertyListByCategoryRequest = async (category)=>{
         // debugger
         store.dispatch(showLoader())
         let URL = `/api/PropertyListByCategory/${category}`
-        store.dispatch(hideLoader())
         let res = await axios.get(URL)
+        store.dispatch(hideLoader())
         if(res.status===200){
             store.dispatch(setPropertyList(res.data["data"]))
         }
@@ -41,8 +41,8 @@ export const PropertyListByFilterRequest = async (filters)=>{
         // debugger
         store.dispatch(showLoader())
         let URL = `/api/PropertyListByFilter`
-        store.dispatch(hideLoader())
         let res = await axios.post(URL,filters)
+        store.dispatch(hideLoader())
         if(res.status===200){
             store.dispatch(setPropertyList(res.data["data"]))
             console.log(res.data)
