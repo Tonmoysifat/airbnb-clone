@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useSelector} from "react-redux";
 import {
     Carousel,
@@ -8,13 +8,22 @@ import {
     CarouselPrevious,
 } from "@/components/ui/carousel"
 import Loader from "../loader/Loader.jsx";
+import {PropertyListByCategoryRequest} from "../../apiRequest/PropertyApiRequest.js";
 
-const Listings = ({PropertyList,CategoryValue,FilterToggle}) => {
+const Listings = () => {
+    const CategoryValue = useSelector((state) => state.category.categoryValue);
+    useEffect(() => {
+        (async () => {
+            await PropertyListByCategoryRequest(CategoryValue);
+        })();
+    }, [CategoryValue]);
+    const PropertyList = useSelector((state) => state.property.PropertyList);
     const loader = useSelector((state) => state.loaderAnimation.loader);
+    const FilterToggle = useSelector((state) => state.category.filterToggle);
     return (
         <>{
             loader?<Loader/>:(PropertyList.map((item,index) => (
-                <div key={index} className="relative bg-white rounded-lg">
+                <div key={index} className="relative bg-white rounded-lg mt-5">
                     <Carousel className="w-full">
                         <CarouselContent>
                             {Array.from(item.images).map((img, index) => (
@@ -24,7 +33,7 @@ const Listings = ({PropertyList,CategoryValue,FilterToggle}) => {
                                 </CarouselItem>
                             ))}
                         </CarouselContent>
-                        <CarouselPrevious />
+                        <CarouselPrevious  className=""/>
                         <CarouselNext />
                     </Carousel>
                     <div className="">

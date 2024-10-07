@@ -25,7 +25,6 @@ const DataSchema = new mongoose.Schema({
         bathrooms: { type: Number },
         images: [String],
         title: { type: String },
-        description: { type: String },
         price: { type: Number },
         priceWithOutTax: { type: Number },
         hosts: { type: String },

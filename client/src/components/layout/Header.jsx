@@ -10,14 +10,18 @@ import FilterModal from "./filterModal/FilterModal.jsx";
 import MapModal from "../../location/MapModal.jsx";
 import CalendarModal from "../calander/CalendarModal.jsx";
 import AddGuestsModal from "../addGuests/AddGuestsModal.jsx";
+import {CategoryListRequest} from "../../apiRequest/CategoryApiRequest.js";
 
-const Header = ({ CategoryList }) => {
+const Header = () => {
     const [inputChecked, setInputChecked] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const dispatch = useDispatch();
     const CategoryValue = useSelector((state) => state.category.categoryValue);
 
     useEffect(() => {
+        (async () => {
+            await CategoryListRequest();
+        })();
         const element = document.querySelector('.parent-container');
         function handleScroll() {
             const scrollPosition = window.scrollY;
@@ -33,7 +37,7 @@ const Header = ({ CategoryList }) => {
             window.removeEventListener('scroll', handleScroll);
         }
     }, []);
-
+    const CategoryList = useSelector((state) => state.category.categoryList);
     const setCatToSessionStorage = (cat) => {
         sessionStorage.setItem("cat", cat);
         dispatch(setCategoryValue(cat));
@@ -90,10 +94,10 @@ const Header = ({ CategoryList }) => {
                 </div>
 
                 <div className="secondary-header hidden md:flex w-full justify-center">
-                    <div className="flex w-fit justify-between gap-10 rounded-full border-[1px] border-solid pb-2 pl-6 pt-2 hover:shadow-lg">
-                        <div className="font-medium cursor-pointer" onClick={() => document.getElementById('my_modal_2').showModal()}>Anywhere</div>
-                        <div className="font-medium cursor-pointer" onClick={() => document.getElementById('my_modal_3').showModal()}>Any week</div>
-                        <div className="font-medium cursor-pointer" onClick={() => document.getElementById('my_modal_4').showModal()}>Add guests</div>
+                    <div className="flex w-fit justify-between items-center gap-10 rounded-full border-[1px] border-solid pb-2 pl-6 pt-2 hover:shadow-lg">
+                        <div className="font-medium cursor-pointer border-r-[1px] pr-3 border-gray-500" onClick={() => document.getElementById('my_modal_2').showModal()}>Anywhere</div>
+                        <div className="font-medium cursor-pointer border-r-[1px] pr-3 border-gray-500" onClick={() => document.getElementById('my_modal_3').showModal()}>Any week</div>
+                        <div className="font-medium cursor-pointer " onClick={() => document.getElementById('my_modal_4').showModal()}>Add guests</div>
                         <div className="mr-3 aspect-square h-9 w-9 rounded-full bg-red-500 flex justify-center items-center text-white">
                             <Search />
                         </div>
@@ -137,17 +141,22 @@ const Header = ({ CategoryList }) => {
                                 <div className="p-1">
                                     <Card className='shadow-none border-0 bg-transparent'>
                                         <CardContent onClick={() => setCatToSessionStorage(item.title)}
-                                                     className={`flex flex-col items-center justify-center p-4 opacity-75 hover:opacity-100 hover:underline cursor-pointer ${sessionStorage.getItem("cat") === item.title ? 'underline text-black' : ''}`}>
+                                                     className={`flex flex-col items-center justify-center px-4 pt-4 
+                                                     pb-1 opacity-75 hover:opacity-100 hover:border-b-[2px] 
+                                                     hover:border-black cursor-pointer font-medium 
+                                                     ${sessionStorage.getItem("cat") === item.title && 
+                                                     'border-b-[2px] border-black font-bold opacity-100'}`}>
                                             <img style={{ width: 30, height: 30 }} src={item.imageUrl} alt={item.title} />
-                                            <span className="text-sm font-normal mb-2">{item.title}</span>
+                                            <span className={`text-sm mb-2`}>{item.title}</span>
+                                            <hr/>
                                         </CardContent>
                                     </Card>
                                 </div>
                             </CarouselItem>
                         ))}
                     </CarouselContent>
-                    <CarouselPrevious className="hidden md:block" />
-                    <CarouselNext className="hidden md:block"/>
+                    <CarouselPrevious className="hidden md:flex" />
+                    <CarouselNext className="hidden md:flex"/>
                 </Carousel>
                 {CategoryValue !== "Icons" && (
                     <div className="hidden md:flex gap-4 ml-16 items-center">

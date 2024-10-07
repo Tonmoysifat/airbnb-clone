@@ -11,33 +11,57 @@
     z-index: 999;
 }
 
-.primary-header {
-    transition: transform 250ms cubic-bezier(0.2, 0, 0, 1), opacity 150ms 250ms cubic-bezier(0.2, 0, 0, 1), visibility 0ms 125ms;
+.primary-header, .secondary-header {
+    transition: transform 250ms ease-in-out, opacity 250ms ease-in-out, visibility 0ms ease-in-out;
+}
 
+/* Hidden primary header by default */
+.primary-header {
+    transition-delay: 0ms;
+    transform: scale(1) translateY(0); /* Initial state */
+    opacity: 1;
+    visibility: visible;
 }
 
 .secondary-header {
     position: absolute;
     top: 0;
     visibility: hidden;
-    transition: transform 250ms cubic-bezier(0.2, 0, 0, 1), opacity 150ms 250ms cubic-bezier(0.2, 0, 0, 1), visibility 0ms 125ms;
-    transform: scale(2.43, 1.75) translateY(58px);
-    transform-origin: 50% 0%;
+    transform: scale(0.9) translateY(20px); /* Initial hidden state */
+    opacity: 0;
+    transition-delay: 0ms;
 }
 
+/* Show secondary-header and hide primary-header when .show-item is added */
 .show-item .primary-header {
+    transform: scale(0.95) translateY(-20px); /* Slight scale down */
+    opacity: 0;
     visibility: hidden;
-    transition: transform 250ms cubic-bezier(0.2, 0, 0, 1), opacity 150ms 250ms cubic-bezier(0.2, 0, 0, 1), visibility 0ms 125ms;
-    transform: scale(0.34, 0.727272) translateY(-58px);
-    transform-origin: 50% 50%;
+    transition-delay: 0ms; /* No delay */
 }
 
 .show-item .secondary-header {
-    left: 50%;
+    left: -2%;
     visibility: visible;
-    transform-origin: 50% 0%;
-    transform: translate(-50%, -50%);
-    top: 50px;
+    transform: scale(1) translateY(0);
+    opacity: 1;
+    transition-delay: 0ms;
+    top: 21px;
+}
+
+/* Restore primary-header and hide secondary-header when .show-item is removed */
+.parent-container:not(.show-item) .primary-header {
+    visibility: visible;
+    transform: scale(1) translateY(0); /* Restore to full size */
+    opacity: 1;
+    transition-delay: 0ms;
+}
+
+.parent-container:not(.show-item) .secondary-header {
+    transform: scale(0.9) translateY(20px); /* Shrink and shift down */
+    opacity: 0;
+    visibility: hidden;
+    transition-delay: 0ms;
 }
 
 .show-item .main-header {
@@ -66,6 +90,10 @@
     @media screen and (max-width: 768px) {
         margin-top: 84px;
     }
+}
+
+.cI:hover .cP{
+    display: block !important;
 }
 
 @layer base {
