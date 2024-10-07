@@ -9,10 +9,8 @@ const MasterLayout = () => {
         <div className="parent-container">
             <Header/>
             <div
-                className={`content-section grid gap-6 pl-10 pr-10 sm:grid-cols-2 
-                lg:grid-cols-4 2xl:grid-cols-6 
-                ${loader===false && PropertyList.length===0 && "sm:grid-cols-1 lg:grid-cols-1 " +
-                "2xl:grid-cols-1"}`}>
+                className={`content-section grid gap-6 pl-10 pr-10 
+                ${!loader && PropertyList.length===0 ? "sm:grid-cols-1 lg:grid-cols-1 2xl:grid-cols-1":"sm:grid-cols-2 lg:grid-cols-4 2xl:grid-cols-6"}`}>
                 <Listings/>
             </div>
         </div>
