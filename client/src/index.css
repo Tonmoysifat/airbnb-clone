@@ -65,7 +65,7 @@
 }
 
 .show-item .main-header {
-    height: 105px;
+    height: 95px;
 }
 
 .filter-header {
@@ -81,7 +81,7 @@
 }
 
 .show-item .filter-header {
-    top: 105px;
+    top: 95px;
 }
 
 .content-section {
@@ -95,7 +95,9 @@
 .cI:hover .cP{
     display: block !important;
 }
-
+/*.lucide .lucide-search{*/
+/*    width: 16px !important;*/
+/*}*/
 @layer base {
     :root {
         --background: 0 0% 100%;

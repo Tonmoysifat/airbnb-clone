@@ -45,8 +45,6 @@ const PropertyServiceByFilter = async (req) => {
         }
 
         const aggregationPipeline = [];
-
-        // Add $geoNear stage if location is provided
         if (location && location.coordinates) {
             const [lon, lat] = location.coordinates;
             aggregationPipeline.push({
@@ -91,7 +89,6 @@ const PropertyServiceByFilter = async (req) => {
             });
         }
 
-        // Add the $match stage if there are other filters
         if (filterQuery.length > 0) {
             aggregationPipeline.push({
                 $match: {
