@@ -62,7 +62,7 @@ const PropertyServiceByFilter = async (req) => {
 
         if (priceWithOutTax) {
             filterQuery.push({
-                priceWithOutTax: {
+                price: {
                     $gte: priceWithOutTax.min,
                     $lte: priceWithOutTax.max
                 }

@@ -1,6 +1,5 @@
 const mongoose = require('mongoose');
 
-// Schema definition
 const DataSchema = new mongoose.Schema({
         category: { type: String },
         privacyType: [{
@@ -10,12 +9,12 @@ const DataSchema = new mongoose.Schema({
         }],
         location: {
             type: {
-                type: String,       // GeoJSON object type
-                enum: ['Point'],     // Must be 'Point'
-                required: true       // Required for geospatial queries
+                type: String,
+                enum: ['Point'],
+                required: true
             },
             coordinates: {
-                type: [Number],      // Array of [longitude, latitude]
+                type: [Number],
                 required: true
             }
         },
@@ -44,10 +43,8 @@ const DataSchema = new mongoose.Schema({
     },
     { timestamps: true, versionKey: false });
 
-// Create the 2dsphere index for the location field
 DataSchema.index({ location: '2dsphere' });
 
-// Model creation
 const PropertyModel = mongoose.model('properties', DataSchema);
 
 module.exports = PropertyModel;

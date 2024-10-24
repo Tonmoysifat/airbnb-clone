@@ -16,18 +16,18 @@ const MapModal = () => {
         document.getElementById('my_modal_2').close();
     }
     return (
-            <dialog id="my_modal_2" className="modal">
-                <div className="modal-box w-full max-w-lg flex flex-col justify-between h-screen">
-                    <Map/>
-                    <div
-                        className=" bottom-0 bg-white py-4  items-center border-t border-gray-300">
-                        <button className="btn btn-primary" onClick={sendMapValue}>Show Results</button>
-                    </div>
+        <dialog id="my_modal_2" className="modal">
+            <div className="modal-box w-full max-w-lg flex flex-col justify-between h-screen">
+                <Map/>
+                <div
+                    className=" bottom-0 bg-white py-4  items-center border-t border-gray-300">
+                    <button className="btn btn-primary" onClick={sendMapValue}>Show Results</button>
                 </div>
-                <form method="dialog" className="modal-backdrop">
-                    <button>close</button>
-                </form>
-            </dialog>
+            </div>
+            <form method="dialog" className="modal-backdrop">
+                <button>close</button>
+            </form>
+        </dialog>
     );
 };
 

@@ -81,7 +81,7 @@ const Header = () => {
                         </div>
                         <div className="flex">
                             <div className="py-[14px] pr-[24px] w-[142px]">
-                                <div className='border-r-[1px] border-gray-[#80808054] cursor-pointer'
+                            <div className='border-r-[1px] border-gray-[#80808054] cursor-pointer'
                                      onClick={() => document.getElementById('my_modal_3').showModal()}>
                                     <div className="font-medium text-sm">Check in</div>
                                     <div className='text-muted-foreground'>Add dates</div>
